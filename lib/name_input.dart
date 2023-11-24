@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:name_shuffle_app/shuffle.dart';
 
@@ -9,8 +11,40 @@ class Name extends StatefulWidget {
 }
 
 class _NameState extends State<Name> {
-  List<String> studentList = ["dfdf"];
+  List<String> studentList = [];
   final TextEditingController _studentController = TextEditingController();
+
+
+  void _validateStudent() {
+  
+    String studentName = _studentController.text.trim();
+    if (studentName.isEmpty || studentList.contains(studentName)) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(studentName.isEmpty
+                ? 'Please Enter Name !'
+                : 'This name is already exists !'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      setState(() {
+        studentList.add(_studentController.text);
+        _studentController.clear();
+      });
+    }
+  
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,12 +78,12 @@ class _NameState extends State<Name> {
                 FilledButton(
                     onPressed: () {
                       setState(() {
-                        studentList.add(_studentController.text);
-                        _studentController.clear();
+                       _validateStudent();
                       });
                     },
                     style: FilledButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 25)),
+                      backgroundColor: Colors.deepOrange,
+                        textStyle: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic)),
                     child: const Text("Add Student")),
                 const SizedBox(
                   width: 20,
@@ -59,7 +93,8 @@ class _NameState extends State<Name> {
                       setState(() {});
                     },
                     style: FilledButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 25)),
+                      backgroundColor: Colors.greenAccent,
+                        textStyle: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic)),
                     child: const Text("Clear List")),
               ],
             ),
@@ -74,7 +109,7 @@ class _NameState extends State<Name> {
                         ))));
               },
               style: ElevatedButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 36)),
+                  textStyle: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic)),
               child: const Text("Shuffle")),
           const SizedBox(
             height: 30,
@@ -99,3 +134,5 @@ class _NameState extends State<Name> {
     );
   }
 }
+
+

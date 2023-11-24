@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:name_shuffle_app/app.dart';
 
 class Shuffle extends StatefulWidget {
   final List<String> studentList;
@@ -28,10 +27,6 @@ class _ShuffleState extends State<Shuffle> {
           while (current<shuffleName.length) {
             int random=Random().nextInt(cardCount-1);
             groups[random].add(shuffleName[current++]);
-          // List<String> remainingGroup =
-          //     shuffleName.sublist(current, current + remainingSize);
-          // groups.add(remainingGroup);
-          // current += remainingSize;
            size += remainingSize;
         }
        }
