@@ -152,11 +152,11 @@ class _NameState extends State<Name> {
               margin: const EdgeInsets.all(50),
               child: ListView.builder(
                 itemCount: studentList
-                    .length, // Replace with the actual number of items
+                    .length, 
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(studentList[index]),
-                    // Other details for each student can be added here
+                   
                   );
                 },
               ),
